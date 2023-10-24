@@ -1,0 +1,55 @@
+import cv2
+import mediapipe as mp
+import time
+
+# 打开默认摄像头
+cap = cv2.VideoCapture(0)
+
+# 创建一个手的实体类来存储手部信息
+mpHands = mp.solutions.hands
+hands = mpHands.Hands()
+
+# 创建一个用于绘制手部关键点和连接线的实体类
+mpDraw = mp.solutions.drawing_utils
+
+pTime = 0
+cTime = 0
+
+while True:
+    # 从摄像头捕获一帧图像
+    success, img = cap.read()
+
+    # 将捕获的图像从BGR颜色空间转换为RGB颜色空间
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    # 处理图像以检测手部信息
+    results = hands.process(imgRGB)
+
+    # 检查是否检测到了手部关键点
+    if results.multi_hand_landmarks:
+        # 遍历每个检测到的手
+        for handLms in results.multi_hand_landmarks:
+            # 获得手部21点的id和其对应的坐标
+            for id, lm in enumerate(handLms.landmark):
+                # print(id,lm)
+                h, w, c = img.shape
+                cx, cy = int(lm.x*w), int(lm.y*h)
+                print(id, cx, cy)
+                if id ==0:
+                    cv2.circle(img, (cx,cy), 25, (255,0,255), cv2.FILLED)
+
+            # 在图像上绘制手部关键点和连接线
+            mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
+
+    cTime = time.time()
+    fps = 1 / (cTime-pTime)
+    pTime = cTime
+
+    cv2.putText(img,str(int(fps)),(10,70),cv2.FONT_HERSHEY_PLAIN,3,
+            (255,0,255),3)
+
+    # 在窗口中显示图像
+    cv2.imshow("Image", img)
+
+    # 按键等待1毫秒，允许窗口保持打开状态
+    cv2.waitKey(1)
