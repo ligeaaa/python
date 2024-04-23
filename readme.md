@@ -7,3 +7,4 @@
 - 003-HandsGet:[分割手部图像](http://www.magic-knowledge.top/2023/11/24/%e5%88%86%e5%89%b2%e6%89%8b%e9%83%a8%e5%9b%be%e5%83%8f/)
 - 004-CV2：[改进变异系数论文代码复现](https://journals.physiology.org/doi/abs/10.1152/jn.1996.75.5.1806)
 - 005-JPSTH：[Joint PSTH论文代码复现](https://journals.physiology.org/doi/abs/10.1152/jn.1989.61.5.900)
+- 006-Autocorrelograms：[Autocorrelograms相关代码复现](https://www.neuroexplorer.com/docs/reference/analysis/types/trainstruct/AutoCorrVersusTime.html)
