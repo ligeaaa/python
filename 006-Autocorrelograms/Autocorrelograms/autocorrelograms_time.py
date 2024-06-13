@@ -74,7 +74,7 @@ class AutocorrelogramsTime:
 
     def draw_autocorrelograms(self):
         r"""
-        Draw the graph shows the Autocorrelograms Versus Time
+        Draw the graph shows the 006-Autocorrelograms Versus Time
         """
         z = [list(row) for row in zip(*self.autocorrelograms_time)]
         x = [start_time for start_time in range(self.number_of_shift)]
